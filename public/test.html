@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <br/>
+    <input type="text" id="aa">
+    <br/>
+    <input type="button" id="getuser" value="信息">
+    <!--</form>-->
+    <script src="javascripts/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        var aa = localStorage.getItem("token")
+        if (aa) {
+            console.log(11);
+            $("#getuser").click(function() {
+                $.ajax({
+                    type: 'get',
+                    url: '/users/userinfo',
+                    data: {
+                        username: $("#aa").val(),
+                        token: localStorage.getItem("token")
+                    },
+                    success: function(res) {
+                        console.log(res);
+                    }
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>

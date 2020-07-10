@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <!--<form action="/register" method="post">-->
+    <p>
+        用户名：
+        <input type="text" name="username" id="" value="" />
+    </p>
+    <p>
+        密码：
+        <input type="text" name="password" id="" value="" />
+    </p>
+    <p>
+        邮箱：
+        <input type="text" name="email" id="" value="" />
+    </p>
+    <p>
+        电话：
+        <input type="text" name="phone" id="" value="" />
+    </p>
+    <input type="submit" value="提交" />
+    <!--</form>-->
+    <script src="javascripts/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        $("input").eq(4).click(function() {
+            $.ajax({
+                type: "post",
+                url: "/users/register",
+                async: true,
+                data: {
+                    username: $("input").eq(0).val(),
+                    password: $("input").eq(1).val(),
+                    email: $("input").eq(2).val(),
+                    phone: $("input").eq(3).val(),
+                },
+                success: function(res) {
+                    console.log(res);
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>
