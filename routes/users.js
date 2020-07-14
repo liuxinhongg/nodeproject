@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var jwt = require("jsonwebtoken"); //生成token
 var secretkey = 'secretkey';
-var db = require("../config/db")
-var userconfig = require("../config/apisql")
+// var db = require("../config/db")
+// var userconfig = require("../config/apisql")
 var Admin = require('../controller/admin/admin')
 router.use(function(req, res, next) {
         console.log(req.url)

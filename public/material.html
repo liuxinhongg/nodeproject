@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title></title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+
+<body>
+    <div style="width: 500px;height: auto;margin: auto;">
+        <div class="form-group">
+            <label for="prjid">项目ID</label>
+            <input type="text" class="form-control" id="prjid">
+        </div>
+        <div class="form-group">
+            <label for="planename">总计划名称</label>
+            <input type="text" class="form-control" id="planname">
+        </div>
+        <div class="form-group">
+            <label for="cmtId">提交人</label>
+            <input type="text" class="form-control" id="cmtId">
+        </div>
+        <div class="form-group">
+            <label for="leaderNext">审批人</label>
+            <input type="text" class="form-control" id="leaderNext">
+        </div>
+        <div class="form-group">
+            <label for="cdate">提交日期</label>
+            <input type="text" class="form-control" id="cdate">
+        </div>
+        <div class="form-group">
+            <label for="mname">材料</label>
+            <input type="text" class="form-control" id="mname">
+        </div>
+        <div class="form-group">
+            <label for="userLoc">使用位置</label>
+            <input type="text" class="form-control" id="userLoc">
+        </div>
+        <div class="form-group">
+            <label for="mnum">使用量</label>
+            <input type="text" class="form-control" id="mnum">
+        </div>
+        <div class="form-group" style="text-align: center;">
+            <button type="submit" class="btn btn-success">提交</button>
+            <button type="submit" class="btn btn-warning">删除</button>
+            <button type="submit" class="btn btn-info">更新</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    // 添加
+    $('.btn-success').click(function() {
+        let materData = {
+            prjid: $('#prjid').val(),
+            planname: $('#planname').val(),
+            cmtId: $('#cmtId').val(),
+            leaderNext: $('#leaderNext').val(),
+            cdate: $('#cdate').val(),
+            mname: $('#mname').val(),
+            userLoc: $('#userLoc').val(),
+            mnum: $('#mnum').val(),
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/material/insert',
+            data: materData,
+            success: data => {
+                console.log(data)
+            },
+            error: error => {
+                console.log(error)
+            }
+        })
+    })
+
+    // 删除
+    $('.btn-warning').click(function() {
+        let materData = {
+            prjid: $('#prjid').val()
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/material/delete/' + materData.prjid,
+            data: materData,
+            success: data => {
+                console.log(data)
+            },
+            error: error => {
+                console.log(error)
+            }
+        })
+    })
+
+    // 更新
+    $('.btn-info').click(function() {
+        let materData = {
+            prjid: $('#prjid').val(),
+            planname: $('#planname').val(),
+            cmtId: $('#cmtId').val(),
+            leaderNext: $('#leaderNext').val(),
+            cdate: $('#cdate').val(),
+            mname: $('#mname').val(),
+            userLoc: $('#userLoc').val(),
+            mnum: $('#mnum').val(),
+        }
+        $.ajax({
+            type: 'GET',
+            url: '/material/update',
+            data: materData,
+            success: data => {
+                console.log(data)
+            },
+            error: error => {
+                console.log(error)
+            }
+        })
+    })
+</script>
+
+</html>
