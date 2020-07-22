@@ -4,7 +4,7 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'web16'
+    database: 'material'
 });
 
 exports.query = function(sql, arr, callback) {

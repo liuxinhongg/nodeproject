@@ -10,43 +10,55 @@ class Admin {
      * 后台注册
      */
     admin_register(req, res, next) {
-        console.log(req.body)
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "content-type");
+        console.log("你好", req.body);
         var user = req.body.username;
         var passwords = req.body.password;
         var useremail = req.body.email;
         var userphone = req.body.phone;
+        // console.log(user, passwords, useremail, userphone)
         //查询数据库
-        db.query(userconfig.user.userSearch, [user], function(result, fields) {
-            console.log(result)
-            if (result.length) {
-                res.send({ "msg": "用户名已存在", "state": 1 })
-            } else {
-                // 新增数据
-                // var addSql = us;
-                var addSqlParams = [user, passwords, useremail, userphone];
-                db.query(userconfig.user.userInsert, addSqlParams, function(result, fields) {
-                    // res.send()
-                    if (fields) {
-                        throw fields;
-                        return;
-                    }
-                    res.send({ "msg": "注册成功", "state": 0 })
-                })
-            }
-        })
+        if (user != "" && passwords != "" && useremail != "" && userphone != "") {
+            db.query(userconfig.user.userSearch, [user], function(result, fields) {
+                // console.log(result)
+                if (result.length) {
+                    res.send({ "msg": "用户名已存在", "state": 1 })
+                } else {
+                    // 新增数据
+                    // var addSql = us;
+                    var addSqlParams = [user, passwords, useremail, userphone];
+                    db.query(userconfig.user.userInsert, addSqlParams, function(result, fields) {
+                        // res.send()
+                        if (fields) {
+                            throw fields;
+                            return;
+                        }
+                        res.send({ "msg": "注册成功", "state": 0 })
+                    })
+                }
+            })
+        } else {
+            res.send({
+                "msg": "输入信息不能为空",
+                "state": -1
+            })
+        }
     };
 
     /*
      *后台登录
      */
     admin_login(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "content-type");
         console.log(req.body)
         var user = req.body.username;
         var passwords = req.body.password;
         //查询数据库
         db.query(userconfig.user.userSearch, [user], function(result, fields) {
             var token = jwt.sign({ username: user }, secretkey, { expiresIn: 60 * 8 });
-            console.log(result.length)
+            console.log(result)
             if (result.length == 0) {
                 res.send({ "msg": "用户名不存在", "state": 1 })
             } else {
@@ -69,6 +81,8 @@ class Admin {
     };
     // 用户的信息的录取
     user_info(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "content-type");
         console.log(req.query)
         var user = req.query.username;
         db.query(userconfig.user.userSearch, [user], function(result, fields) {
