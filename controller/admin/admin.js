@@ -12,7 +12,6 @@ class Admin {
     admin_register(req, res, next) {
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "content-type");
-        console.log("你好", req.body);
         var user = req.body.username;
         var passwords = req.body.password;
         var useremail = req.body.email;

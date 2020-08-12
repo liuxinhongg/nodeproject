@@ -30,5 +30,5 @@ router.post('/register', Admin.admin_register);
 // 登录接口
 router.post('/login', Admin.admin_login);
 // 获取用户信息
-router.get("/userinfo", Admin.user_info)
+router.get("/userinfo", Admin.user_info);
 module.exports = router;
